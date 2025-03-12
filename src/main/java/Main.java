@@ -8,21 +8,21 @@ public class Main {
         System.out.println("Вам необходимо ввести данные автомобилей, а именно: их название и скорость");
         for (int i = 0; i < 3; i++) {
             System.out.printf("Введите название машины №%d:%n", i + 1);
-            String nameCar = scanner.next();
+            String nameCar = scanner.nextLine();
             String textSpeedCar;
             int speedCar;
             while (true) {
                 System.out.printf("Введите скорость машины №%d:%n", i + 1);
-                textSpeedCar = scanner.next();
+                textSpeedCar = scanner.nextLine();
                 try {
                     speedCar = Integer.parseInt(textSpeedCar);
                     if (speedCar > 0 && speedCar <= 250) {
                         break;
                     } else {
-                        showErrorMessage();
+                        printErrorMessage();
                     }
                 } catch (NumberFormatException e) {
-                    showErrorMessage();
+                    printErrorMessage();
                 }
             }
             Car car = new Car(nameCar, speedCar);
@@ -31,33 +31,7 @@ public class Main {
         System.out.println("Самая быстрая машина: " + race.leader);
     }
 
-    static private void showErrorMessage() {
+    static private void printErrorMessage() {
         System.out.println("Неверный ввод, попробуйте еще раз");
     }
 }
-
-class Car {
-    String name;
-    int speed;
-
-    public Car(String name, int speed) {
-        this.name = name;
-        this.speed = speed;
-    }
-}
-
-class Race {
-    String leader = "";
-    int distance = 0;
-
-    public void getLeader(Car car) {
-        int newDistance = car.speed * 24;
-        if (newDistance > distance) {
-            distance = newDistance;
-            leader = car.name;
-        }
-    }
-
-
-}
-
